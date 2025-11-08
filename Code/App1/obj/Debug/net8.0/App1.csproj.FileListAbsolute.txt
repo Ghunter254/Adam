@@ -12,3 +12,4 @@ C:\Users\ypaul\Desktop\Whatever\Adam Learning Materials\Code\App1\obj\Debug\net8
 C:\Users\ypaul\Desktop\Whatever\Adam Learning Materials\Code\App1\obj\Debug\net8.0\App1.pdb
 C:\Users\ypaul\Desktop\Whatever\Adam Learning Materials\Code\App1\obj\Debug\net8.0\App1.genruntimeconfig.cache
 C:\Users\ypaul\Desktop\Whatever\Adam Learning Materials\Code\App1\obj\Debug\net8.0\ref\App1.dll
+C:\Users\ypaul\Desktop\Whatever\Adam Learning Materials\Code\App1\obj\Debug\net8.0\App1.sourcelink.json

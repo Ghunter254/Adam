@@ -3,7 +3,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Lessons.Variables.Run();
+        Lessons.InputOutput.Run();
     }
 }
 
