@@ -1,10 +1,13 @@
 namespace Lessons;
 
 class Variables
-// Primitives and Constants.
+// Primitives and Constants. 
+//(They are also called value types: int float char double bool -> Then struct and enum to be discussed later): Stored in stack memory
+// Later we shall discuss reference types (string (Discussed here), arrays, classes , lists, objects): Stored in heap memory
 {
     public static void Run()
     {
+        Console.WriteLine("=== Lesson 1: Variables ===");
 
         // Variables are mutable while constants are not.
         // Variables can be declared without initialization.

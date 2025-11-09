@@ -4,7 +4,7 @@ class InputOutput
 {
     public static void Run()
     {
-
+        Console.WriteLine("=== Lesson 3: Input & Output ===");
         // Console.WriteLine() outputs text and moves to a new line... i.e. creates a newline after.
         Console.WriteLine("This is a line with a newline at the end.");
 

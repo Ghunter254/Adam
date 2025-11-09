@@ -5,6 +5,7 @@ class TypeCasting
 {
     public static void Run()
     {
+        Console.WriteLine("=== Lesson 2: Type Casting ===");
         // Implicit casting (automatically) - from smaller to larger data type
         int myInt = 9;
         double myDouble = myInt; // Automatic conversion
