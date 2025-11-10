@@ -14,6 +14,7 @@ class IfStateMents
         try
         {
             Console.WriteLine("Please enter your score: ");
+
             bool success = int.TryParse(Console.ReadLine(), out int score);
 
             if (success)

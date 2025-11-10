@@ -2,12 +2,12 @@ namespace Exercises;
 
 class Exercise_1
 {
-    public static void Run()
-    {
-        Console.WriteLine("=== Lesson 1: Variables & Type Casting Exercises ===");
-        Console.WriteLine("Answer the questions inside this file as comments and code where required.");
-        Console.WriteLine("Scroll up in the file to begin answering.\n");
-    }
+   public static void Run()
+   {
+      Console.WriteLine("=== Lesson 1: Variables & Type Casting Exercises ===");
+      Console.WriteLine("Answer the questions inside this file as comments and code where required.");
+      Console.WriteLine("Scroll up in the file to begin answering.\n");
+   }
 }
 
 /*
@@ -55,6 +55,7 @@ SECTION B: MULTIPLE CHOICE (Write the letter only)
    Answer:
 
 2. Which method will NOT crash if the input cannot be converted to an int?
+value = "hello"
    a) (int)value
    b) Convert.ToInt32(value)
    c) int.Parse(value)
@@ -108,7 +109,7 @@ SECTION C: CODE EXERCISES (Fill in missing code)
 
 3. Demonstrate Parse and TryParse:
 
-   // Convert "42" using int.Parse
+   // Convert "42" using int.Parse // 42
    // Convert "42" using int.TryParse
    // Convert "hello" using int.TryParse (should not crash)
 
@@ -117,9 +118,11 @@ SECTION C: CODE EXERCISES (Fill in missing code)
    string n2 = "hello";
 
    int parsedValue = int.Parse(n1);
+   // FormatException.
    Console.WriteLine(parsedValue);
 
    bool result1 = int.TryParse(n1, out int try1);
+
    bool result2 = int.TryParse(n2, out int try2);
 
    Console.WriteLine($"TryParse 1 Successful: {result1}, Value: {try1}");
@@ -130,14 +133,6 @@ SECTION C: CODE EXERCISES (Fill in missing code)
 SECTION D: GOATED EXERCISE 
 ---------------------------------------------------
 
-Write a program that:
-- Asks the user to enter their age
-- Safely converts it using TryParse
-- If conversion fails, print "Invalid age!"
-- If valid:
-    - If age >= 18 print "You are an adult."
-    - Else print "You are a minor."
 
-(Put your code below in the Run() method of this class)
 
 */

@@ -12,11 +12,19 @@ class InputOutput
         Console.Write("This is on the same line... ");
         Console.Write("see? Still same line.\n"); // The \n creates a newline
 
+        // Console.WriteLine("Please enter your age: ");
+        // Please enter your age:
+        // _ 
+
+        // Console.Write("Please enter your age: ");
+        // Please enter your age: _
+
         // String interpolation (cleaner way to combine variables into strings)
         // In earlier lessons we used concatenation with + ... but this is neater.
         string demoName = "Adam";
         int demoAge = 20;
         Console.WriteLine($"My name is {demoName}, and I am {demoAge} years old."); // Note the $ before the string
+        Console.WriteLine("My name is " + demoName + " , and I am " + demoAge + " years old");
 
 
         // Console.ReadLine() always returns a string ... So even when asking for a number, it returns text.
@@ -37,12 +45,16 @@ class InputOutput
         // Example: converting invalid input, dividing by zero, reading missing files, etc.
 
         Console.Write("Enter a number to divide 100 by: ");
-        string numberInput = Console.ReadLine() ?? string.Empty;
+        
+        string numberInput = Console.ReadLine() ?? string.Empty; // "12"
+
 
         try
         {
             // int.Parse() throws an exception if the input is not a valid number
+            // "12" int.Parse("hello") => 12
             int userNumber = int.Parse(numberInput);
+
 
             int result = 100 / userNumber; // Will throw if userNumber == 0
 
@@ -57,6 +69,10 @@ class InputOutput
         {
             // Happens if the user types 0
             Console.WriteLine("Error: You cannot divide by zero.");
+        }
+        catch (NotFiniteNumberException)
+        {
+            Console.WriteLine("Error: Not finite number");
         }
         catch (Exception ex)
         {
