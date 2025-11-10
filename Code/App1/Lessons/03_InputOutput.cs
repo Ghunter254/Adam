@@ -23,10 +23,10 @@ class InputOutput
         Console.Write("Enter your name: ");
 
         // We ask for a value from the user and store it in a variable.
-        string name = Console.ReadLine();
+        string name = Console.ReadLine() ?? string.Empty;
 
         Console.Write("Enter your age: ");
-        string ageInput = Console.ReadLine(); // This is still a string
+        string ageInput = Console.ReadLine() ?? string.Empty; // This is still a string
 
         Console.WriteLine($"Hello {name}, you are {ageInput} years old.");
 
@@ -37,7 +37,7 @@ class InputOutput
         // Example: converting invalid input, dividing by zero, reading missing files, etc.
 
         Console.Write("Enter a number to divide 100 by: ");
-        string numberInput = Console.ReadLine();
+        string numberInput = Console.ReadLine() ?? string.Empty;
 
         try
         {

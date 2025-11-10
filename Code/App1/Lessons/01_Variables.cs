@@ -20,18 +20,20 @@ class Variables
         // - Cannot be a reserved keyword
         // - Always use meaningful names
         // Notations include: camelCase, PascalCase, snake_case, strHungarianNotation
-        int myNum = 5;               // Integer (whole number)
+
+        int myNum = 5;         // Integer (whole number)
         double myDoubleNum = 5.99;  // Floating point number
         char myLetter = 'D';        // Character
         string myText = "Hello";    // String
-        bool myBool = true;         // Boolean
+        bool myBool = false;         // Boolean
 
-        const float Pi = 3.14f; // Constant variable (Use PascalCase for constants)
+        const float PI = 3.14f; // Constant variable (Use PascalCase for constants)
 
-        Console.WriteLine("Integer: " + myNum);
+        Console.WriteLine("Integer: " + myNum); // string concatenation
         Console.WriteLine("Double: " + myDoubleNum);
         Console.WriteLine("Character: " + myLetter);
         Console.WriteLine("String: " + myText);
         Console.WriteLine("Boolean: " + myBool);
+        Console.WriteLine("Constant: " + PI);
     }
 }
