@@ -22,8 +22,14 @@ class TypeCasting
         double myDouble2 = 9.78;
         int myInt2 = (int)myDouble2; // Manual conversion -> Can lose data, truncates decimal part
 
+        string age = "20";
+        int number = -1;
         // Another method to cast using Convert class
-        int myInt3 = Convert.ToInt32(myDouble2); // Safer and more versatile.
+        // int myInt3 = Convert.ToInt32(myDouble2); // Safer and more versatile.
+        int myInt3 = Convert.ToInt32(myDouble2);
+        int myInt4 = Convert.ToInt32(age);
+        bool test = Convert.ToBoolean(number);
+
 
         // The convert class has other methods like ToDouble, ToString, ToBoolean, etc.
 
@@ -31,6 +37,8 @@ class TypeCasting
         Console.WriteLine("Double: " + myDouble2);
         Console.WriteLine("Integer: " + myInt2);
         Console.WriteLine("Integer using Convert: " + myInt3);
+        Console.WriteLine("String: " + myInt4);
+        Console.WriteLine("Boolean conversion: " + test);
     }
 }
 
