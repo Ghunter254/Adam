@@ -2,12 +2,12 @@ namespace Exercises;
 
 class Exercise_1
 {
-    public static void Run()
-    {
-        Console.WriteLine("=== Lesson 1: Variables & Type Casting Exercises ===");
-        Console.WriteLine("Answer the questions inside this file as comments and code where required.");
-        Console.WriteLine("Scroll up in the file to begin answering.\n");
-    }
+   public static void Run()
+   {
+      Console.WriteLine("=== Lesson 1: Variables & Type Casting Exercises ===");
+      Console.WriteLine("Answer the questions inside this file as comments and code where required.");
+      Console.WriteLine("Scroll up in the file to begin answering.\n");
+   }
 }
 
 /*
@@ -22,10 +22,15 @@ Visit the official Microsoft C# documentation for more details.
 Link: https://learn.microsoft.com/en-us/dotnet/csharp/
 
 1. What is the difference between a variable and a constant in C#?
-   Answer:
+   Answer: A variable is mutable and can be initialized without declaration, a constant is immutable and must be initialized and declared together
 
 2. Name 5 primitive data types in C#, and give one example use for each.
    Answer:
+   Integers - for declaring integer values
+   Booleans - for logic operations
+   Strings - for declaring words like names or locations
+   Doubles - for decimals, has larger space than floats
+   Floats - for decimals, has smaller space than doubles
 
 3. What is the difference between implicit and explicit casting?
    Answer:
@@ -48,11 +53,11 @@ SECTION B: MULTIPLE CHOICE (Write the letter only)
 --------------------------------------------------
 
 1. Which of the following is a valid variable declaration?
-   a) int 1age = 10;
-   b) int age-1 = 10;
-   c) int age = 10;
-   d) int @ = 10;
-   Answer:
+   a) int 1age = 10; (can't start with number)
+   b) int age-1 = 10; (can't use special characters)
+   c) int age = 10; 
+   d) int @ = 10; (can't use a keyword/special character)
+   Answer: c
 
 2. Which method will NOT crash if the input cannot be converted to an int?
    a) (int)value
@@ -85,12 +90,12 @@ SECTION C: CODE EXERCISES (Fill in missing code)
    "My name is Adam, I am 20 years old, 1.75m tall, Student: True"
 
    // Your code below:
-   string name = "";
-   int age = 0;
-   double height = 0.0;
-   bool isStudent = false;
+   string name = "Adam";
+   int age = 20;
+   double height = 1.75;
+   bool isStudent = true;
 
-   Console.WriteLine();
+   Console.WriteLine("My name is " + name ", I am " + age " years old, " + height "m tall, Student: " +isStudent);
 
 
 2. Demonstrate explicit casting:
