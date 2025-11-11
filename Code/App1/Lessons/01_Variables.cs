@@ -1,9 +1,12 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace Lessons;
 
 class Variables
 // Primitives and Constants. 
 //(They are also called value types: int float char double bool -> Then struct and enum to be discussed later): Stored in stack memory
 // Later we shall discuss reference types (string (Discussed here), arrays, classes , lists, objects): Stored in heap memory
+
 {
     public static void Run()
     {

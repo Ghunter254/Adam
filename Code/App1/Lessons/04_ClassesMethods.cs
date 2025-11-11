@@ -29,6 +29,7 @@ class ClassesMethods
 {
     public static void Run()
     {
+        // Static means this method belongs to the class.
         Console.WriteLine("=== Lesson 4: Classes & Methods ===");
 
         // Now classes can be of two types: Built-in classes and Custom classes.
@@ -53,15 +54,28 @@ class ClassesMethods
         // person1 = new Person("Adam", 20);
         // Or we could also use the new version:
         // Person person1 = new() { Name = "Adam", Age = 20 }; // Using object initializer syntax (Requires public properties)
-        Person person1 = new Person("Adam", 20); // Creating an instance of the Person class.
-        Person person2 = new Person("Eve", 22); // Creating another instance of the Person class.
 
-        Person person3 = person1; // person3 references the same object as person1.
+        //Person person1 = new Person("Adam", 20); // Creating an instance of the Person class.
+        //Person person2 = new Person("Eve", 22); // Creating another instance of the Person class.
+
+        //Person person3 = person1; // person3 references the same object as person1.
+
+        Calculator calc1 = new(5, 6);
+        calc1.number1 = 6;
+        calc1.Addition();
+        int sum = calc1.Add();
+        Console.WriteLine("And the returned sum is: " + sum);
+
+        Calculator calc2 = new(7, 8);
+        calc2.Addition();
+
+        Calculator.Multiply(4, 5);
+        
 
 
-        person1.Introduce(); // Calling the Introduce method of the Person class.
-        person2.Introduce(); // Calling the Introduce method of the Person class.
-        person3.Introduce(); // Calling the Introduce method of the Person class.
+        //person1.Introduce(); // Calling the Introduce method of the Person class.
+        //person2.Introduce(); // Calling the Introduce method of the Person class.
+        //person3.Introduce(); // Calling the Introduce method of the Person class.
 
         // The output will show that each object has its own state (name and age) and the method operates on that state.
         // Changing person3 will also change person1 since they reference the same object.
@@ -88,6 +102,33 @@ class Person
     public void Introduce()
     {
         Console.WriteLine($"Hello! My name is {name}, and I am {age} years old.");
+    }
+}
+
+class Calculator
+{
+    public int number1; // calcobj1 => {number1, number2} //
+    public int number2;  // calcobj2 => {number1, number2} //
+
+    public Calculator(int num1, int num2)
+    {
+        number1 = num1;
+        number2 = num2;
+    }
+
+    public void Addition()
+    {
+        Console.WriteLine($"The addition result is:  {number1 + number2}");
+    }
+
+    public int Add()
+    {
+        return number1 + number2;
+    }
+
+    public static void Multiply(int number1, int number2)
+    {
+        Console.WriteLine($"The addition result is:  {number1 * number2}");
     }
 }
 

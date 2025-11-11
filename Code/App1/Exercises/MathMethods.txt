@@ -1,0 +1,2 @@
+
+Math.Sqrt(int number) => Square root of number;
