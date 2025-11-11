@@ -1,3 +1,30 @@
+namespace Exercises;
+
+class Exercise_2
+{
+    public static void Run()
+   {
+      Console.WriteLine("Enter ur name");
+      string urName = Console.ReadLine() ?? string.Empty;
+
+      Console.WriteLine("Enter ur age");
+      int urAge = int.Parse((Console.ReadLine()?? string.Empty));
+
+      Console.WriteLine("Gimme ur height");
+      double urHeight = double.Parse(Console.ReadLine() ?? string.Empty);
+
+      int firstheight = (int)urHeight;
+      int secondheight = Convert.ToInt32(urHeight);
+
+      Console.WriteLine($"{urName} is {urAge} years old");
+      Console.WriteLine($"The first method gives us {firstheight} and the second method gives us {secondheight}");
+
+    }
+
+
+
+
+}
 
 
     // For this exercise, come up  with your own answers and code implementations.
@@ -12,12 +39,17 @@
 
         1. Name 5 ways to convert a string to a double in C#.
         Answer:
+        Explicit casting
+        Convert Method
+        Parse Method
+        TryParse Method
 
         2. Why is TryParse considered safer than Parse?
-        Answer:
+        Answer: Parse throws an exception that has to be dealt with when the method can't convert it
+        TryParse just says false when the method can't convert the thing
 
         3. What happens if you cast a double to int using (int)?
-        Answer:
+        Answer: You lowkey lose some data as it just truncates shi.
         */
 
 

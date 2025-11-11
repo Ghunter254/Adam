@@ -1,2 +1,22 @@
+First thing.
+Math Class
+ Math.Asin(Double) => returns the angle who's sine is the specified number
+ Math.Acos(Double) => returns the angle who's cosine is the specified number
+ Math.Atan(Double) => returns the angle who's tangent is the specified number
 
-Math.Sqrt(int number) => Square root of number;
+
+Second thing
+
+    1. Console Class
+
+Console.Write(string) => writes the specified string value to the standard output stream
+Console.Readline() => reads the next line of characters from the input stream. 
+
+    2. DateTime Class
+
+DateTime.Addhours(Double) => Returns a new date and time with the specified number of hours added in the correct format
+Datetime.DaysinMonth(Int32,Int32) => Returns the number of days in a specified month of the year.
+
+
+
+

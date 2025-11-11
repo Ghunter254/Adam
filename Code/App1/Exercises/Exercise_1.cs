@@ -33,19 +33,20 @@ Link: https://learn.microsoft.com/en-us/dotnet/csharp/
    Floats - for decimals, has smaller space than doubles
 
 3. What is the difference between implicit and explicit casting?
-   Answer:
+   Answer: Implicit casting doesn't need you to state the target variable type
+Explicit casting needs you to state the target variable 
 
 4. What does the 'f' mean in `float pi = 3.14f;`?
-   Answer:
+   Answer: it makes sure that the language actually deals with it as a float
 
 5. What is the difference between:
       (int)myDouble
       Convert.ToInt32(myDouble)
-   Answer:
+   Answer: the first one truncates while the second one rounds off
 
 6. What is the purpose of Parse() and TryParse() methods?
 This wasnt covered in the lessons so I expect you to research it yourself.
-   Answer:
+   Answer: Parse either returns the output or throws an error, TryParse returns a bool of either false or true
 
 
 --------------------------------------------------
@@ -65,14 +66,14 @@ value = "hello"
    b) Convert.ToInt32(value)
    c) int.Parse(value)
    d) int.TryParse(value, out result)
-   Answer:
+   Answer: d
 
 3. What does explicit casting do?
    a) Converts without loss
    b) May remove decimal part
    c) Always rounds numbers
    d) Prevents data loss
-   Answer:
+   Answer: a and d
 
 
 ---------------------------------------------------
