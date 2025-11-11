@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace Exercises;
 
 
@@ -25,19 +27,29 @@ class Calculator
     {
         Console.WriteLine($"Result of Multiplication: {num1 * num2}");
     }
+    //Wow I was using integers throughout and then the division obviously didn't work so I cahnged that shi to a double.
     public static void Division(double num1, double num2)
     {
-        Console.WriteLine($"Result of Division: {num1/num2}");
+        Console.WriteLine($"Result of Division: {num1 / num2}");
     }
 
 
 
-public static void Run()
+    public static void Run()
     {
         Calculator.Multiplication(12, 23);
         Calculator.Division(12, 23);
         Calculator.Addition(12, 23);
         Calculator.Subtraction(12, 23);
-    }
 
+        catch (FormatException);
+        {
+            Console.WriteLine($"Error: What you have entered is invalid. Use numbers only");
+        }
+        Catch(DivideByZeroException);
+        {
+            Console.WriteLine("Error: You cannot divide by zero");
+        }
+
+    }
 }
