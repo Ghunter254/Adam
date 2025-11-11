@@ -14,7 +14,7 @@ class Program
 
         //Exercises.Exercise_2.Run();
 
-        Exercises.Calculator.Run();
+        Exercises.Main.Run();
     }
 }
 

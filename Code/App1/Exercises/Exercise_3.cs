@@ -1,3 +1,59 @@
+namespace Exercises;
+    // 3. In the Main method or a separate Run() method, do the following:
+    //    - Ask the user to enter the student's name.
+    //    - Ask the user to enter the student's age.
+    //     - Make sure to validate that age is a positive integer using int.TryParse().
+    //    - Create a Student object and assign the input values to the properties.
+
+class Main
+{
+    public static void Run()
+    {
+        Console.WriteLine("Enter ur Name silly: ");
+        string Name = Console.ReadLine() ?? string.Empty;
+
+        Console.WriteLine("Enter ur Age silly:");
+        bool confirmed = int.TryParse(Console.ReadLine(), out int Age);
+
+        Student Student1 = new(Name, Age);
+        Student1.DisplayInfo();
+
+        Student Student2 = new("Yona", 30);
+        Student2.DisplayInfo();
+
+        Student Student3 = Student1;
+        Student3.DisplayInfo();
+
+        Student1.Name = "Literally Me";
+        Console.WriteLine($"Student 3 is {Student3.Name} \nStudent 1 is {Student1.Name}");
+
+        string a = "yeg";
+        string b = a;
+        Console.WriteLine($"Integer a is {a} and integer b is {b}");
+
+        b = "gey";
+        Console.WriteLine($"Integer a is {a} and integer b is {b}");
+    }
+
+}
+
+class Student
+{
+    public string Name;
+    public int Age;
+
+    public Student(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"The Student {Name} is {Age} years old");
+    }
+
+}
 
     /*
     ==============================

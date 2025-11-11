@@ -10,7 +10,35 @@ namespace Exercises;
 // 4. Make sure to use try-catch to handle errors where appropriate.
 // 5. The methods should be static so they can be called without creating an instance of the Calculator class.
 
+class Steve
+{
+     public static void Run()
+    {
 
+        try
+        {
+            Calculator.Multiplication(12, 10);
+        Calculator.Division(10, 12);
+        Calculator.Addition(12, 23);
+        Calculator.Subtraction(12, 23);
+            
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine($"Error: What you have entered is invalid. Use numbers only");
+        }
+
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Error: You cannot divide by zero");
+        }
+
+    }
+    
+
+
+
+}
 class Calculator
 {
 
@@ -18,7 +46,6 @@ class Calculator
     {
         Console.WriteLine($"Result of Addition: {num1 + num2}");
     }
-
     public static void Subtraction(double num1, double num2)
     {
         Console.WriteLine($"Result of Subtraction: {num1 - num2}");
@@ -33,23 +60,4 @@ class Calculator
         Console.WriteLine($"Result of Division: {num1 / num2}");
     }
 
-
-
-    public static void Run()
-    {
-        Calculator.Multiplication(12, 23);
-        Calculator.Division(12, 23);
-        Calculator.Addition(12, 23);
-        Calculator.Subtraction(12, 23);
-
-        catch (FormatException);
-        {
-            Console.WriteLine($"Error: What you have entered is invalid. Use numbers only");
-        }
-        Catch(DivideByZeroException);
-        {
-            Console.WriteLine("Error: You cannot divide by zero");
-        }
-
-    }
 }
