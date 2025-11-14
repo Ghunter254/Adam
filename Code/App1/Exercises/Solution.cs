@@ -1,5 +1,3 @@
-
-
 namespace Solution
 {
     class Product

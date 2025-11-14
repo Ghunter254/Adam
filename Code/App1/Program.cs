@@ -15,8 +15,7 @@ class Program
 
         //Exercises.Exercise_2.Run();
 
-        //Exercises.Main.Run();
-        Exercises.Student.Run();
+        Assignments.Main.Run();
 
     }
 }

@@ -61,7 +61,7 @@ class Student  //The actual class and shi
         }
     }
 }
-class Mainone
+class Main
 {
     public static void Run()
     {
