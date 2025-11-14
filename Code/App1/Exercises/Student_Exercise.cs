@@ -1,11 +1,4 @@
 namespace Assignments;
-
-class Main  //Just to run the code and the try catch and shi
-{
-    
-
-}
-
 class Student  //The actual class and shi
 {
     //Fields
@@ -14,7 +7,6 @@ class Student  //The actual class and shi
     public int mathMarks;
     public int scienceMarks;
     public int englishMarks;
-
 
     //Constructor
     public Student(string name, int age, int mathMarks, int scienceMarks, int englishMarks)
@@ -25,7 +17,6 @@ class Student  //The actual class and shi
         this.scienceMarks = scienceMarks;
         this.englishMarks = englishMarks;
     }
-
 
     public double CalculateAverage()
     // This shi has a "double" identifier since it is an instance method and returns some data and shi
@@ -60,13 +51,17 @@ class Student  //The actual class and shi
 
             return new Student(studentName, studentAge, studentMath, studentScience, studentEnglish);
         }
-        
         catch (FormatException)
         {
             Console.WriteLine("Bro come on man enter proper digits");
-
+            return null;
         }
     }
-
+        
+    public static void Run()
+    {
+        Student Yona = RequestStudentData();
+        Yona.DisplayReport();
+    }
 
 }
