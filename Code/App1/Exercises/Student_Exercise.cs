@@ -1,4 +1,5 @@
 namespace Assignments;
+
 class Student  //The actual class and shi
 {
     //Fields
@@ -24,12 +25,14 @@ class Student  //The actual class and shi
         return (mathMarks + scienceMarks + englishMarks) / 3;
     }
 
+    //Void Method and has no output
     public void DisplayReport()
     {
         Console.WriteLine($"Student Name: {name}\nStudent Age: {age}");
         Console.WriteLine($"Average Score: {CalculateAverage()}");
     }
 
+    //Static method, needs no object reference
     public static Student RequestStudentData()
     {
         try
@@ -57,11 +60,12 @@ class Student  //The actual class and shi
             return null;
         }
     }
-        
+}
+class Mainone
+{
     public static void Run()
     {
-        Student Yona = RequestStudentData();
+        Student Yona = Student.RequestStudentData();
         Yona.DisplayReport();
     }
-
 }
