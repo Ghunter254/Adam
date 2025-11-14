@@ -17,7 +17,7 @@ class Steve
 
         try
         {
-            Calculator.Multiplication(12, 10);
+        Calculator.Multiplication(12, 10);
         Calculator.Division(10, 12);
         Calculator.Addition(12, 23);
         Calculator.Subtraction(12, 23);
