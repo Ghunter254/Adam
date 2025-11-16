@@ -41,16 +41,16 @@ class Student  //The actual class and shi
             string studentName = Console.ReadLine() ?? string.Empty;
 
             Console.WriteLine("Lowkey how old are you");
-            bool proper = int.TryParse(Console.ReadLine(), out int studentAge);
+            int studentAge = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            Console.WriteLine("Lowkey how old are you");
-            bool properMath = int.TryParse(Console.ReadLine(), out int studentMath);
+            Console.WriteLine("Lowkey what did you get in Math");
+            int studentMath = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            Console.WriteLine("Lowkey how old are you");
-            bool properScience = int.TryParse(Console.ReadLine(), out int studentScience);
+            Console.WriteLine("Lowkey what did you get in Science");
+            int studentScience = int.Parse(Console.ReadLine() ?? string.Empty);
 
-            Console.WriteLine("Lowkey how old are you");
-            bool properEnglish = int.TryParse(Console.ReadLine(), out int studentEnglish);
+            Console.WriteLine("Lowkey what did you get in English");
+            int studentEnglish = int.Parse(Console.ReadLine() ?? string.Empty);
 
             return new Student(studentName, studentAge, studentMath, studentScience, studentEnglish);
         }
@@ -61,7 +61,7 @@ class Student  //The actual class and shi
         }
     }
 }
-class Mainone
+class Main
 {
     public static void Run()
     {
