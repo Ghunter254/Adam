@@ -1,5 +1,3 @@
-
-
 namespace Lessons;
 
 class IfStateMents
@@ -42,22 +40,44 @@ class IfStateMents
         try
         {
             Console.WriteLine("Please enter your score: ");
+
             bool success = int.TryParse(Console.ReadLine(), out int score);
 
-            if (success)
+            if (success) // Talk about logical (not) if success == false
             {
-                if (score < 0 || score > 100)
+                // if (score > 0 && score < 100) // Talk about && and operator 
+                // {
+                //     Student student1 = new(score);  
+                //     student1.GradeStudent();
+                //     Student2.GradeStudent(score);
+                // }
+                // else
+                // {
+                //     Console.WriteLine("Invalid input");
+                // }
+
+                // 2. The 'if-else if-else' ladder
+                // Only one of these blocks will ever execute.
+            
+                if (score >= 90) Console.WriteLine("Grade: A (Excellent)");
+
+                else if (score >= 80) Console.WriteLine("Grade: B (Good)");
+
+                else if (score >= 70) Console.WriteLine("Grade: C (Average)");
+                
+                else if (score >= 60) Console.WriteLine("Grade: D (Passing)");
+                
+                else 
                 {
-                    Console.WriteLine("Invalid input");
-                    return;
+                    Console.WriteLine("Grade: F (Failing)");
                 }
-                else
+
+                if (score == 100)
                 {
-                    Student student1 = new(score);  
-                    student1.GradeStudent();
-                    Student2.GradeStudent(score);
+                    Console.WriteLine("Bonus: Perfect score!");
                 }
             }
+
             else
             {
                 Console.WriteLine("Invalid input");
@@ -85,6 +105,7 @@ class Student
         {
             Console.WriteLine("Student failed.");
         }
+        // Talk about else if
         else
         {
             Console.WriteLine("Student passed.");
@@ -102,6 +123,15 @@ class Student2
         if (score < 60)
         {
             Console.WriteLine("Student failed.");
+
+            if (score > 50)
+            {
+                Console.WriteLine("Your grade is A");
+            }
+            else
+            {
+                Console.WriteLine("You have failed. No reason for Grade. Bring your parents.");
+            }
         }
         else
         {

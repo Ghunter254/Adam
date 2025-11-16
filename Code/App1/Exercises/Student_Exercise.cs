@@ -57,7 +57,7 @@ class Student  //The actual class and shi
         catch (FormatException)
         {
             Console.WriteLine("Bro come on man enter proper digits");
-            return null;
+            return new Student("", 0,0,0,0);
         }
     }
 }
