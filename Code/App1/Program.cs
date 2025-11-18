@@ -9,11 +9,12 @@ class Program
         // Lessons.InputOutput.Run();
         //Lessons.ClassesMethods.Run();
         // Lessons.StringMethods.Run();
-        Lessons.IfStateMents.Run2();
+        //Lessons.IfStateMents.Run2();
 
         //Exercises.Exercise_2.Run();
 
         //Exercises.Main.Run();
+        Assignments.Applicant.Run();
 
     }
 }
