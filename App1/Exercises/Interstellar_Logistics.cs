@@ -1,7 +1,7 @@
 namespace Assignments;
 
 
-class Shipment
+public class Shipment
 { //This class is probably where I want to store all the user input.
 
     public string destination;
@@ -130,7 +130,7 @@ class Shipment
     }
    
 }
-class QuoteEngine
+public class QuoteEngine
 {//Handling the logic here.
     public static void Run()
     {
