@@ -56,8 +56,9 @@ class Student  //The actual class and shi
         }
         catch (FormatException)
         {
-            Console.WriteLine("Bro come on man enter proper digits");
-            return new Student("", 0,0,0,0);
+            Console.WriteLine("Bro come on man enter proper digits, sasa hizi ni gani.");
+            return null;  // we can return an object that is empty instead. 
+                          // this involves filling the parameters with empty thingies i.e a string is "" and an int is 0
         }
     }
 }
@@ -68,4 +69,4 @@ class Main
         Student Yona = Student.RequestStudentData();
         Yona.DisplayReport();
     }
-}
+} 
