@@ -1,6 +1,6 @@
 namespace Assignments;
 
-class Applicant
+public class Applicant
 {
     public string name;
     public int age;
