@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace Assignments;
 
 
@@ -41,24 +39,24 @@ class Shipment
             _ => 0.00
       };
       return distanceCoeff;
-
+    }
     public int baseCargoFee()
     {
-        if (this.cargoWeightCentauri <= 500 && this.cargoWeight != 0)
+        if (this.cargoWeight <= 500 && this.cargoWeight != 0)
         {
             return this.cargoWeight*10;
             
         }
         else if(this.cargoWeight > 500 && this.cargoWeight != 0)
         {
-            Console.WriteLine("Since your entered weight exceeds 500 tons, we add a double surcharge for every ton above 500");
+            Console.WriteLine("Since your entered weight exceeds 500 tons, we add a double surcharge for every ton above 500 tons.");
             int excessWeight = this.cargoWeight - 500;
             return this.cargoWeight*10 + excessWeight*50;
         }
         else
         {
             Console.WriteLine("Enter an actual weight dumbass");
-            return 0;
+            return this.cargoWeight*0;
         }
     }
     public double cargoModifier()
@@ -77,24 +75,34 @@ class Shipment
 
     public int interstellarModifier()
     {
-        if (distanceCoeff > 10.26)
+        
+        if (distanceCoeff() > 10.26)
         {
             Console.WriteLine("Your Destination is interstellar. The use of the Alcubierre Drive incurs an increase in cost");
             int interstellarCost = 1000;
             return interstellarCost;
         }
+        else
+        {
+            return 0;
+        }
     }
 
+    public void travelTime()
+    {
+        //If the next two methods don't work tomorrow I will just kill myself, plain and simple
+        //Travel time = Distance coefficient*cargo type modifier
 
+        double travelTime = distanceCoeff()*cargoModifier();
+        Console.WriteLine($"Your travel time is {travelTime} years");
+    }
+    public void travelCost()
+    {//Travel cost = distance coefficient*100 + (Cargo weight*10 + extra weight$50)*cargo type + interstellar modifier
 
-       
-      
-
-
-
-      
-        
-
+        double travelCost = distanceCoeff()*100 + baseCargoFee()*cargoModifier() + interstellarModifier();
+        Console.WriteLine($"Your base Cargo Fee is {baseCargoFee()} million dollars");
+        Console.WriteLine($"Since your goood is {this.cargoType}, an extra fee multiplier of {cargoModifier()} is added");
+        Console.WriteLine($"Your total travel cost is {travelCost} million dollars");
     }
     public static Shipment createShipment()
     {//making the shipment object
@@ -116,7 +124,7 @@ class Shipment
         }
         catch(FormatException)
         {
-            Console.WriteLine("Enter the proper phrases");
+            Console.WriteLine("Enter proper phrases");
             return new Shipment("", 0 ,"");
         }
     }
@@ -126,11 +134,9 @@ class QuoteEngine
 {//Handling the logic here.
     public static void Run()
     {
-
-
-
+        Shipment first = Shipment.createShipment();
+        first.travelCost();
+        first.travelTime();
     }
-
-    
 }
 
