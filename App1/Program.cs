@@ -14,7 +14,9 @@ class Program
         //Exercises.Exercise_2.Run();
 
         //Exercises.Main.Run();
-        Assignments.QuoteEngine.Run();
+        //Assignments.QuoteEngine.Run();
+        //Lessons.SecuritySystem.Run();
+        Solutions.Program.Run();
 
     }
 }

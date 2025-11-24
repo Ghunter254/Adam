@@ -126,9 +126,9 @@ class Calculator
         return number1 + number2;
     }
 
-    public static void Multiply(int number1, int number2)
+    public static void Multiply(int num1, int num2)
     {
-        Console.WriteLine($"The addition result is:  {number1 * number2}");
+        Console.WriteLine($"The addition result is:  {num1 * num2}");
     }
 }
 
