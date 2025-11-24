@@ -1,0 +1,43 @@
+Travel time and cost are pegged to the following modifiers.
+    1. Distance coefficient
+        I want to add a flat cost increase to interstellar destinations as well
+            Moon = 5.58
+            Mercury = 8.17
+            Venus = 8.18
+            Mars = 8.36
+                Phobos = 8.36
+                Deimos = 8.36
+            Jupiter = 8.89
+                Europa = 8.89
+                Io = 8.89
+                Ganymede = 8.89
+            Saturn = 9.15
+                Titan = 9.15
+                Enceladus = 9.15
+            Uranus = 9.46
+            Neptune = 9.65
+            Proxima Centauri B = 13.64
+
+
+    2. Cargo Weight(in tons)
+        Cargo weight should add a flat amount as well(in millions of dollars)
+        The minimum shipment should be 1 ton at 10$ per ton.
+        Any amount above 500 tons will then incur a much larger 50$ per ton fee
+    
+    3. Cargo type
+        I want cargo types to be handled using multipliers pegged to the cargo weight via switch cases
+            a. Regular = 1.0
+            b. Fragile = 1.5
+            c. Extra Fragile = 4
+            d. Liquid = 6
+            e. Gas = 6.5
+    
+    4. Interstellar modifier  
+        This modifier is just a flat increase based on a boolean variable. This will be in the planets list.
+        If the planet is in interstellar space, it adds an extra 1000 to cost due to the need for storing exotic matter.
+
+Travel time formula
+Travel time = Distance coefficient*cargo type modifier
+
+Travel cost formula
+Travel cost = distance coefficient*100 + (Cargo weight*10 + extra weight$50)*cargo type + interstellar modifier
