@@ -13,7 +13,8 @@ public class SecuritySystem
 {
     // Field: The correct password (hardcoded for this lesson)
     private string correctPassword = "admin"; 
-    
+
+
     // INSTANCE METHOD: The While Loop Logic
     public void StartLoginSequence()
     {
