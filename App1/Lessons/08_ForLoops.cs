@@ -37,7 +37,7 @@ public class InvestmentTool
         // 2. i <= YearsToGrow -> Keep going as long as 'i' is less than or equal to the target
         // 3. i++            -> After every loop, increase 'i' by 1
         
-        for (int i = 1; i <= YearsToGrow; i++) 
+        for (int year = 1; year <= YearsToGrow; year++) // year = 2
         {
             // The Logic inside the loop happens EVERY year
             double interestEarned = currentBalance * InterestRate;
@@ -46,7 +46,7 @@ public class InvestmentTool
 
 
             // Using "N2" to format as a number with 2 decimals
-            Console.WriteLine($"Year {i}: +${interestEarned.ToString("N2")} Interest | New Balance: ${currentBalance:N2}");
+            Console.WriteLine($"Year {year}: +${interestEarned.ToString("N2")} Interest | New Balance: ${currentBalance:N2}");
         }
 
         Console.WriteLine("------------------------------------------------");
