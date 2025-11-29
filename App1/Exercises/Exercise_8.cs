@@ -101,7 +101,7 @@ EXPECTED OUTPUT EXAMPLE
 
 > --- SYSTEM BOOT ---
 > Current Energy: 0%
-> Enter command:   STABILIZE   
+> Enter command:   STABILIZE  
 > (Yellow Text) Energy increased to 20%...
 > ... (Loop continues until 100%) ...
 > SYSTEM CALIBRATED.
