@@ -69,7 +69,7 @@ class ClassesMethods
         Calculator calc2 = new(7, 8);
         calc2.Addition();
 
-        Calculator.Multiply(4, 5);
+        Calculator.Add2(4, 5,6,7);
         
 
 
@@ -126,10 +126,21 @@ class Calculator
         return number1 + number2;
     }
 
-    public static void Multiply(int num1, int num2)
-    {
-        Console.WriteLine($"The addition result is:  {num1 * num2}");
+    public static void Add2(params int[] numbers)
+    {   
+        int total = 0;
+        for (int i = 0 ; i< numbers.Length; i++)
+        {
+            total += numbers[i];
+        }
+        foreach (int num in numbers)
+        {
+             total += num;
+        }
+        Console.WriteLine($"The addition result is:  {total}");
     }
+
+
 }
 
 
