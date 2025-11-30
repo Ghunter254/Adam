@@ -2,27 +2,11 @@ namespace Exercises;
 
 class TimeMachine
 {
-    public int CurrentYear;
     public int Energy;
     public bool IsCalibrated;
-    public int Destination;
 
-    // public TimeMachine()
-    // //This is to fix an error. It allows for me to use a simple Run method.
-    // //This is a parameterless constructor. What is inside will be overriden later.
-    // {
-    //     CurrentYear = 0;
-    //     Energy = 0;
-    //     Destination = 0;
-    //     IsCalibrated = false;
-    // }
-    // public TimeMachine(int currentYear, int energy, bool isCalibrated, int destination)
-    // {
-    //     CurrentYear = currentYear;
-    //     Energy = energy;
-    //     IsCalibrated = isCalibrated;
-    //     Destination = destination;
-    // }
+    //For this class I don't need constructors since I am not passing the data.
+    //I wont get them since I am not constructing the class
 }
 
 //For this thingie, I want to have a class that manipulates each loop.
@@ -89,7 +73,7 @@ class MachineCalibration
 
 class TimeEvents
 {
-    public static bool TemporalEvents(TimeMachine timeMachine)
+    public static void TemporalEvents(TimeMachine timeMachine)
     {
         Random value = new Random();
         int eventModifier = value.Next(0,11);
@@ -98,31 +82,31 @@ class TimeEvents
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Stable Cruise, regular discharge per temporal saccade initiated.");
-            timeMachine.Energy = timeMachine.Energy + 3;
+            timeMachine.Energy = Math.Clamp(timeMachine.Energy -3, 0, 100);
         }
         else if (eventModifier == 1 || eventModifier == 2 || eventModifier == 3)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Temporal Anomaly detected, increased energy required for bypass.");
-            timeMachine.Energy = timeMachine.Energy - 10;
+            timeMachine.Energy = Math.Clamp(timeMachine.Energy -10, 0, 100);
         }
         else if(eventModifier == 4 || eventModifier == 5 || eventModifier ==6 || eventModifier == 8)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Gravitational Assist incurred, decreased energy required for temporal saccade.");
-            timeMachine.Energy = timeMachine.Energy + 10;
+            timeMachine.Energy = Math.Clamp(timeMachine.Energy +10, 0, 100);
         }
         if (timeMachine.Energy == 0)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"Catastrophic Failure with Capacitor Bank! Temporal Saccade interrupted!");
             Console.ResetColor();
-            return false;
+            return;
         }
+        
         Console.ResetColor();
         Console.WriteLine($"Remaining Energy in Capacitor = {timeMachine.Energy}");
-        return true;
-
+        return;
     }
 }
 
@@ -131,16 +115,13 @@ class MachineJourney
     //This method first needs to find out whether the number is negative or positive
     public void machineJourney(TimeMachine timeJourney)
     {
-        int startYear = timeJourney.CurrentYear;
-        int endYear = timeJourney.Destination;
-
         try
         {
             Console.WriteLine($"What is the current Year?");
-            startYear = int.Parse(Console.ReadLine()?? string.Empty);
+            int startYear = int.Parse(Console.ReadLine()?? string.Empty);
 
             Console.WriteLine($"What is the destination Year?");
-            endYear = int.Parse(Console.ReadLine()?? string.Empty);
+            int endYear = int.Parse(Console.ReadLine()?? string.Empty);
             
             Console.WriteLine("----------------------------------------");
             Thread.Sleep(300);
@@ -192,10 +173,10 @@ class Trip
     {
         Console.WriteLine("====TEMPORAL NAVIGATION CONSOLE OVERVIEW");
         //First setting up the TimeMachine Instance
-        TimeMachine pilot = new TimeMachine();
+        TimeMachine pilot = new ();
 
         //Now to calibrate the machine with User Input
-        MachineCalibration calibration = new MachineCalibration(); // Instantiating the Class
+        MachineCalibration calibration = new (); // Instantiating the Class
         bool calibrated = calibration.Stabilization(pilot);        // Using the stabilization method to pass the calibration value
         if (calibrated == false)
         {
@@ -205,7 +186,7 @@ class Trip
         }
 
         //Now to run the loop that actually does the fucking journey
-        MachineJourney journey = new MachineJourney();
+        MachineJourney journey = new ();
         journey.machineJourney(pilot);
 
         //Fuckass exit message
@@ -213,8 +194,5 @@ class Trip
         Console.WriteLine($"Temporal Journey Complete. Remaining Energy = {pilot.Energy}");
         Console.ResetColor();
     }
-    
-
-
 }
 
