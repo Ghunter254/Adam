@@ -40,7 +40,7 @@ class MachineCalibration
             try
             {
                 Console.WriteLine("Add or Remove Chrono Crystals?");
-                string stabilizerModifier = Console.ReadLine().Trim().ToUpper()?? string.Empty;
+                string stabilizerModifier = Console.ReadLine()?.Trim().ToUpper()?? string.Empty;
                     if (stabilizerModifier == "ADD")
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
