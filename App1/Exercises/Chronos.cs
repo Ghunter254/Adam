@@ -7,22 +7,22 @@ class TimeMachine
     public bool IsCalibrated;
     public int Destination;
 
-    public TimeMachine()
-    //This is to fix an error. It allows for me to use a simple Run method.
-    //This is a parameterless constructor. What is inside will be overriden later.
-    {
-        CurrentYear = 0;
-        Energy = 0;
-        Destination = 0;
-        IsCalibrated = false;
-    }
-    public TimeMachine(int currentYear, int energy, bool isCalibrated, int destination)
-    {
-        CurrentYear = currentYear;
-        Energy = energy;
-        IsCalibrated = isCalibrated;
-        Destination = destination;
-    }
+    // public TimeMachine()
+    // //This is to fix an error. It allows for me to use a simple Run method.
+    // //This is a parameterless constructor. What is inside will be overriden later.
+    // {
+    //     CurrentYear = 0;
+    //     Energy = 0;
+    //     Destination = 0;
+    //     IsCalibrated = false;
+    // }
+    // public TimeMachine(int currentYear, int energy, bool isCalibrated, int destination)
+    // {
+    //     CurrentYear = currentYear;
+    //     Energy = energy;
+    //     IsCalibrated = isCalibrated;
+    //     Destination = destination;
+    // }
 }
 
 //For this thingie, I want to have a class that manipulates each loop.
@@ -40,7 +40,7 @@ class MachineCalibration
             try
             {
                 Console.WriteLine("Add or Remove Chrono Crystals?");
-                string stabilizerModifier = Console.ReadLine().Trim().ToUpper()?? string.Empty;
+                string stabilizerModifier = Console.ReadLine()?.Trim().ToUpper()?? string.Empty;
                     if (stabilizerModifier == "ADD")
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -82,6 +82,7 @@ class MachineCalibration
             }
         }
     Console.WriteLine("Capacitor Bank is fully Charged.");
+    timeMachine.Energy = storedEnergy;
     return  timeMachine.IsCalibrated = true;
     }
 }
