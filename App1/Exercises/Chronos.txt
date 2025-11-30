@@ -1,0 +1,46 @@
+This is a time travel thing.
+Remember to structure it into multiple classes.
+
+Find a command to pause the console for an amount of time
+        Thread.Sleep(1000) - pauses the terminal for 1 second
+
+
+Find a command to change the terminal text colour
+        Console.ForegroundColor = ConsoleColor.Red; //This changes the colour to green
+        Console.ResetColor();                       //This resets the terminal colour back
+
+
+Find a command to make the case of an input insignificant
+        string input = Console.ReadLine().Trim().ToLower();
+        string input = Console.ReadLine().Trim().ToUpper();  // The trim removes spaces and shi
+
+
+Find a command to generate a random event each year using a RNG
+        Random value = new Random();
+        int value = value.Next(0, 101); // generates a random number from 1 to 100.(last value is excluded)
+        
+Find a way to prevent energy from going above 100 or below 0
+        Value = Math.Clamp(value, 0, 100);
+
+
+
+OPERATION PHASES
+
+Phase 1(WHILE loop)
+    In this phase, a while loop runs that allows the user to stabilize the craft
+    This happens in increments and decrements of 20 and 10
+    The loop must begin at zero and end at 100
+    UNSTABLE must be in yellow
+    STABILIZE must be in green
+    When we get to 100 percent power the loop terminates and moves on
+
+Phase 2(FOR loop)
+In this phase, the user actually makes their trip
+The user inputs starting date and destination date
+Make it so that the machine detects what direction in time they are moving in(does the loop count up or down)
+
+In the loop
+    Pause for a time
+    Generate a random number(1-10)
+        Each random number event will either take or give energy
+    If energy drops to zero or lower, catastrophic failure
