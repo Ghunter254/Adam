@@ -73,7 +73,7 @@ class MachineCalibration
 
 class TimeEvents
 {
-    public static void TemporalEvents(TimeMachine timeMachine)
+    public static bool TemporalEvents(TimeMachine timeMachine)
     {
         Random value = new Random();
         int eventModifier = value.Next(0,11);
@@ -101,12 +101,12 @@ class TimeEvents
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"Catastrophic Failure with Capacitor Bank! Temporal Saccade interrupted!");
             Console.ResetColor();
-            return;
+            return false;
         }
         
         Console.ResetColor();
         Console.WriteLine($"Remaining Energy in Capacitor = {timeMachine.Energy}");
-        return;
+        return true;
     }
 }
 

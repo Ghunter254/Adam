@@ -1,0 +1,28 @@
+Step 1, UI Cleaning and Method Research
+1. CURRENCY FORMATTING
+   - We don't want to see "1500.555555". We want "$1,500.56".
+   - Search Term: "C# string format currency".
+            Results
+             You have to declare the shi and then pass it as a variable in the function lowkey
+
+            decimal amount = 1921.39m;  //The m makes it so that it is treated like a decimal number and not a double
+            String.Format("Whatever text is in here: {0:C}, amount");
+
+2. COMPOUND INTEREST MATH
+   - The formula for a mortgage payment involves powers (exponents).
+   - You cannot write `number ^ 10` in C#.
+   - Search Term: "C# Math.Pow example".
+            Results
+                We use a Math.Pow method to exponentify shi
+                define a base and define an exponent and then plug them into the function
+                Math.Pow(base,exponent)
+
+3. CONSOLE CLEANING
+   - When the user passes qualification, clear the screen so the report 
+     looks like a fresh document.
+   - Search Term: "C# Console.Clear".
+            Results
+                The function Console.Clear() just clears the console vile iko
+                Just like that, so real.
+
+

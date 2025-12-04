@@ -100,7 +100,7 @@ EXPECTED OUTPUT EXAMPLE
 > Enter Income: 5000
 > Enter Debts: 3000
 > (Red Text) DTI is 60%. DECLINED. Please try again.
->
+> 
 > Enter Income: 6000
 > Enter Debts: 1000
 > (Green Text) DTI is 16%. APPROVED.

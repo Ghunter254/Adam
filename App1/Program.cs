@@ -17,7 +17,7 @@ class Program
         //Assignments.QuoteEngine.Run();
         //Lessons.Program.Run();
         // Solutions.Program.Run();
-        Exercises.Trip.Run();
+        //Exercises.Trip.Run();
 
     }
 }
