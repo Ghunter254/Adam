@@ -2,8 +2,8 @@ namespace Exercises;
 
 class LoanApplicant
 {
-    public int Income;
-    public int Debt;
+    public double Income;
+    public double Debt;
     public bool IsQualified;
     
     public LoanApplicant(int income, int debt, bool isQualified)
@@ -39,33 +39,30 @@ class QualificationEngine()
 
     public bool RunQualification(LoanApplicant loanApplicant)
     {//We want this while loop to only break when the results are positive
-        decimal currentIncome = loanApplicant.Income;
-        decimal currentDebt = loanApplicant.Debt;
-
-        while(loanApplicant.IsQualified == false)
+        while(!loanApplicant.IsQualified)
         {
             try
             {
                 Console.WriteLine("What is your Monthly Income?");
-                currentIncome = decimal.Parse(Console.ReadLine()??string.Empty);
+                loanApplicant.Income = double.Parse(Console.ReadLine()??string.Empty);
 
                 Console.WriteLine("What is your Monthly Debt?");
-                currentDebt = decimal.Parse(Console.ReadLine()??string.Empty);
+                loanApplicant.Debt = double.Parse(Console.ReadLine()??string.Empty);
 
                 Console.WriteLine("Calculating DTI.......");
                 Thread.Sleep(2000);
 
                 double loanDTI=loanApplicant.CalculateDTI();
-                if(loanDTI > 43 && loanDTI <= 100)
+                if(loanDTI > 43 && loanDTI <= 100 && loanDTI >= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"Your current DTI of {loanDTI} is above 43%. We cannot offer you a loan at this time");
                     Console.ResetColor();
                 }
-                else if(loanDTI < 43 && loanDTI <= 100)
+                else if(loanDTI < 43 && loanDTI >= 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Your current DTI of {loanDTI} is above 43%. APPROVED!");
+                    Console.WriteLine($"Your current DTI of {loanDTI} is below 43%. APPROVED!");
                     Console.ResetColor();
                     return loanApplicant.IsQualified = true;
                 }
@@ -76,5 +73,13 @@ class QualificationEngine()
                 return false;
             }
         }
+    return loanApplicant.IsQualified;
     }
 }
+
+class Amortization()
+{// this class handles the loan request.
+    public 
+    
+}
+
