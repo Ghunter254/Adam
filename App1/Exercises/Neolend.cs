@@ -64,6 +64,8 @@ class QualificationEngine
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"Your current DTI of {loanDTI}% is below 43%. APPROVED!");
                     Console.ResetColor();
+                    Thread.Sleep(3000);
+                    Console.Clear();
                     return loanApplicant.IsQualified = true;
                 }
             }
@@ -133,25 +135,38 @@ class MortgageEngine
     }
     public void GenerateReport()
     {//This fuckass function generates the report lowkey
-//THE LOOP (The Schedule):
-//Create a FOR loop that runs from month 1 to month n.
-//Inside the loop, for every month:
-//1. Calculate Interest Payment = Current Balance * r.
-//2. Calculate Principal Payment = Total Monthly Payment - Interest Payment.
-//3. Update Current Balance = Current Balance - Principal Payment.
-//4. Print the row: "Month X | Payment: $... | Principal: $... | Interest: $... | Balance: $..."
-        Console.WriteLine("-----REPAYMENT SCHEDULE-----");
-
-        double currentBalance = mortgadeData.loanAmount;
-        int months = mortgadeData.loanPeriod*12;
-        double payment = CalculateMortgage();
-
-        for(int i = 1; i == months; i++)
+        //THE LOOP (The Schedule):
+        //Create a FOR loop that runs from month 1 to month n.
+        //Inside the loop, for every month:
+        //1. Calculate Interest Payment = Current Balance * r.
+        //2. Calculate Principal Payment = Total Monthly Payment - Interest Payment.
+        //3. Update Current Balance = Current Balance - Principal Payment.
+        //4. Print the row: "Month X | Payment: $... | Principal: $... | Interest: $... | Balance: $..."
+        try
         {
-            double interestPayment = currentBalance*mortgadeData.interestRate;
-            double principalPayment = payment*interestPayment;
-            currentBalance = currentBalance - principalPayment;
-            Console.WriteLine($"Month {i}   | Payment: {principalPayment:C} | Principal: {}  | Interest: {interestPayment:C} | Balance: {currentBalance:C}")
+            Console.WriteLine("-----REPAYMENT SCHEDULE-----");
+
+            double currentBalance = mortgadeData.loanAmount;
+            int months = mortgadeData.loanPeriod*12;
+            double payment = CalculateMortgage();
+
+            for(int i = 1; i == months; i++)
+            {
+                if (i % 12 == 0)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("====END OF YEAR====");
+                }
+                double interestPayment = currentBalance*mortgadeData.interestRate;
+                double principalPayment = payment - interestPayment;
+                currentBalance = currentBalance - principalPayment;
+                Console.WriteLine($"Month {i}   | Payment: {payment:C} | Principal: {principalPayment}  | Interest: {interestPayment:C} | Balance: {currentBalance:C}");
+            }
+        }
+        catch(FormatException)
+        {
+            Console.WriteLine("Enter the proper format of data my brother in Christ");
+            return;
         }
     }
 }
