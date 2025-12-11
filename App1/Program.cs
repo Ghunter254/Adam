@@ -18,6 +18,7 @@ class Program
         //Lessons.Program.Run();
         // Solutions.Program.Run();
         //Exercises.Trip.Run();
+        Exercises.Main2.Run2();
 
     }
 }

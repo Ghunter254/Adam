@@ -5,18 +5,12 @@ class LoanApplicant
     public double Income;
     public double Debt;
     public bool IsQualified;
-    
-    public LoanApplicant(int income, int debt, bool isQualified)
-    {
-        Income = income;
-        Debt = debt;
-        IsQualified = isQualified;
-    }
+
     public double CalculateDTI()
     {//DTI = (Total Monthly Debts / Total Monthly Income) * 100.
         try
         {
-             double dti = Debt/Income * 100;
+            double dti = Debt/Income * 100;
             return dti;
         }
         catch(DivideByZeroException)
@@ -35,9 +29,7 @@ class LoanApplicant
 class QualificationEngine
 {
     //We will use this class as specified in the readme
-
-
-    public bool RunQualification(LoanApplicant loanApplicant)
+    public static bool RunQualification(LoanApplicant loanApplicant)
     {//We want this while loop to only break when the results are positive
         while(!loanApplicant.IsQualified)
         {
@@ -72,7 +64,6 @@ class QualificationEngine
             catch(FormatException)
             {
                 Console.WriteLine("Enter proper values my brother");
-                return false;
             }
         }
     return loanApplicant.IsQualified;
@@ -109,7 +100,7 @@ class Amortization
         catch(FormatException)
         {
             Console.WriteLine("Enter appropriately formatted information kindly");
-            return RequestLoanData();
+            return new(0.0, 0.0, 0);
         }
     }
 }
@@ -121,8 +112,7 @@ class MortgageEngine
     //r = Monthly Interest Rate (Annual Rate / 100 / 12)
     //n = Total Months (Years * 12)
     //(Use Math.Pow for the ^ part).
-    Amortization mortgadeData = Amortization.RequestLoanData();
-    public double CalculateMortgage() 
+    public double CalculateMortgage(Amortization mortgadeData) 
     {
         double principal = mortgadeData.loanAmount; //P
         double monthlyInterest= mortgadeData.interestRate/100/12; // r
@@ -133,7 +123,7 @@ class MortgageEngine
         double monthlyPayment = principal*(monthlyInterest * Math.Pow(base1,exponent1))/(Math.Pow(base1,exponent1)-1);
         return monthlyPayment;
     }
-    public void GenerateReport()
+    public void GenerateReport(Amortization mortgadeData)
     {//This fuckass function generates the report lowkey
         //THE LOOP (The Schedule):
         //Create a FOR loop that runs from month 1 to month n.
@@ -145,19 +135,20 @@ class MortgageEngine
         try
         {
             Console.WriteLine("-----REPAYMENT SCHEDULE-----");
-
             double currentBalance = mortgadeData.loanAmount;
             int months = mortgadeData.loanPeriod*12;
-            double payment = CalculateMortgage();
+            double payment = CalculateMortgage(mortgadeData);
 
-            for(int i = 1; i == months; i++)
+
+            for(int i = 1; i <= months; i++)
             {
                 if (i % 12 == 0)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("====END OF YEAR====");
+                    Console.ResetColor();
                 }
-                double interestPayment = currentBalance*mortgadeData.interestRate;
+                double interestPayment = currentBalance*mortgadeData.interestRate/100/12;
                 double principalPayment = payment - interestPayment;
                 currentBalance = currentBalance - principalPayment;
                 Console.WriteLine($"Month {i}   | Payment: {payment:C} | Principal: {principalPayment}  | Interest: {interestPayment:C} | Balance: {currentBalance:C}");
@@ -170,4 +161,14 @@ class MortgageEngine
         }
     }
 }
-
+class Main2
+{
+    public static void Run2()
+    {
+        LoanApplicant loanApplicant = new();
+        bool isVerified = QualificationEngine.RunQualification(loanApplicant);
+        Amortization mortgageData = Amortization.RequestLoanData();
+        MortgageEngine mortgageEngine = new();
+        mortgageEngine.GenerateReport(mortgageData);
+    }
+}
