@@ -10,6 +10,16 @@
 
 using System.Collections.Generic; // <--- CRITICAL: Lists live inside here!
 
+// Constructors of Lists:
+// List<T>() : Initializes a new instance of the List<T> class that is empty and has the default initial capacity.
+// List<T>(IEnumerable<T>) : Initializes a new instance of the List<T> class that contains elements copied from the 
+// specified collection and has sufficient capacity to accommodate the number of elements copied.
+// List<T>(Int32) : Initializes a new instance of the List<T> class that is empty and has the specified initial capacity.
+
+// Properties of Lists:
+// Capacity: The number of elements that the List can store before resizing is required.
+// Count: The number of elements that are actually in the List.
+// item[Int32]: Gets or sets the element at the specified index.
 namespace Lessons
 {
     // PART 1: THE CONCEPT
@@ -18,6 +28,7 @@ namespace Lessons
     // Array = An Egg Carton. It has exactly 12 spots. You cannot fit a 13th egg.
     // List  = A Notepad. You can write 1 line, or 100 lines. You can rip a page out.
     //         It grows and shrinks as you need it.
+    // Allows duplicate elements and accepts null values for reference types.
 
     class PartyPlanner
     {
@@ -27,6 +38,8 @@ namespace Lessons
 
             // DECLARATION
             // Syntax: List<DataType> name = new List<DataType>();
+            // Arrays: string[] varName = new string[10];
+            // List<string> guests = new List<string>(varName);
             List<string> guests = new List<string>();
             // List<string> guests = new();
 

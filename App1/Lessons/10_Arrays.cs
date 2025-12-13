@@ -216,7 +216,7 @@ namespace Lessons
     // MAIN PROGRAM SELECTOR
     // ---------------------------------------------------------
 
-    class Program
+    class Arrays
     {
         public static void Run()
         {
