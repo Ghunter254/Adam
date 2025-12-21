@@ -6,7 +6,7 @@ Step 1, UI Cleaning and Method Research
              You have to declare the shi and then pass it as a variable in the function lowkey
 
             decimal amount = 1921.39m;  //The m makes it so that it is treated like a decimal number and not a double
-            String.Format("Whatever text is in here: {0:C}, amount");
+            String.Format("Whatever text is in here: {0:C}, amount"); //I guess we only use this in outputting
 
 2. COMPOUND INTEREST MATH
    - The formula for a mortgage payment involves powers (exponents).

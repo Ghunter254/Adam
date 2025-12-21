@@ -37,6 +37,7 @@ class QualificationEngine
             {
                 Console.WriteLine("What is your Monthly Income?");
                 loanApplicant.Income = double.Parse(Console.ReadLine()??string.Empty);
+                Console.WriteLine(loanApplicant.Income);
 
                 Console.WriteLine("What is your Monthly Debt?");
                 loanApplicant.Debt = double.Parse(Console.ReadLine()??string.Empty);
@@ -86,6 +87,7 @@ class Amortization
     {
         try
         {
+            
             Console.WriteLine("How large of a loan would you like?");
             double loanAmount = double.Parse(Console.ReadLine()??string.Empty);
             
@@ -166,7 +168,6 @@ class Main2
     public static void Run2()
     {
         LoanApplicant loanApplicant = new();
-        bool isVerified = QualificationEngine.RunQualification(loanApplicant);
         Amortization mortgageData = Amortization.RequestLoanData();
         MortgageEngine mortgageEngine = new();
         mortgageEngine.GenerateReport(mortgageData);
