@@ -10,6 +10,7 @@ class Program
         //Lessons.ClassesMethods.Run();
         // Lessons.StringMethods.Run();
         //Lessons.IfStateMents.Run2();
+       //Lessons.ListsDemo.Run();
 
         //Exercises.Exercise_2.Run();
 
@@ -18,7 +19,8 @@ class Program
         //Lessons.Program.Run();
         // Solutions.Program.Run();
         //Exercises.Trip.Run();
-        Exercises.Main2.Run2();
+        //Exercises.Main2.Run2();
+        Exercises.MainThree.Run();
 
     }
 }

@@ -125,7 +125,7 @@ class Program
         Console.ReadLine();
     }
 
-    static void Main(string[] args)
+    static void Mainzero(string[] args)
     {
         
         RunQualification();

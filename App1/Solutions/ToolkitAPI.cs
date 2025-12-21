@@ -6,8 +6,7 @@ class ListUtils
     public static List<string> RemoveIndexSafe(List<string> datalist, int index)
     {
         List<string> datalistRemove = new List<string>();
-
-        if(index >= 0 && index <= datalist.Count()-1)
+        if(index >= 0 && index < datalist.Count)
         {
             for(int i = 0; i < datalist.Count; i++)
             {
@@ -17,18 +16,20 @@ class ListUtils
                 }
             }
             Console.WriteLine($"[Success]; Removed {datalist[index]} from index {index}");
+            return datalistRemove;
+
         }
         else
         {
             Console.WriteLine($"[Error]; index {index} is out of range");
+            return datalist;
         }
-        return datalistRemove;
     }   
     public static List<string> SwapItems(List<string> datalist, int indexA, int indexB)
     {
         List<string> datalistSwap = new List<string>(); 
 
-        if(indexA >= 0 && indexA <= datalist.Count()-1 && indexB >= 0 && indexB <= datalist.Count()-1)
+        if(indexA >= 0 && indexA <= datalist.Count-1 && indexB >= 0 && indexB <= datalist.Count-1)
         {
             string objectA = datalist[indexA];
             string objectB = datalist[indexB];
@@ -63,7 +64,6 @@ class ListUtils
             {
                 datalistReplace.Add(replacement);
                 count++;
-                
             }
             else
             {
@@ -80,21 +80,21 @@ class ListUtils
      //It is then placed in a new list if it has no repeats
      
         List<string> datalistPurge = new List<string>();
-        int j = 0;
-        int repeatno = 0;
+        
         for(int i = 0; i < datalist.Count; i++)
         {//This first loop loops through the list
-            while(j < datalist.Count)
+            int repeatno = 0;
+            for(int j = 0; j < datalist.Count; j++)
             {//this loops through everything else in the list and compares it
                 if(datalist[j] == datalist[i])
                 {
                     repeatno++;
                 }
-                j++;
             }
-            if (repeatno > 0)
+            if (repeatno == 1)
             {
                 datalistPurge.Add(datalist[i]);
+                repeatno--;
             }
         }
         Console.WriteLine("[Success]; List Cleaned");
@@ -105,38 +105,62 @@ class MainThree
 {
     public static void Run()
     {   // Printing List
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("PRINTING ORIGINAL LIST");
+        Console.ResetColor();
         List<string> datalist = ["Milk", "Eggs", "Milk", "Bread", "Milk", "Cheese"];
         foreach (string item in datalist)
         {
-            Console.WriteLine($"{item}");
+            Console.Write($"[{item}] ");
         }
+        Console.WriteLine();
+
         // Safe Remove Test
-        ListUtils.RemoveIndexSafe(datalist, 100);
-        ListUtils.RemoveIndexSafe(datalist, 1);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("SAFE REMOVE TEST");
+        Console.ResetColor();
+        datalist = ListUtils.RemoveIndexSafe(datalist, 100);
+        datalist = ListUtils.RemoveIndexSafe(datalist, 2);
         foreach (string item in datalist)
         {
-            Console.WriteLine($"{item}");
+            Console.Write($"[{item}] ");
         }
+        Console.WriteLine();
+
         // Replace Test
-        ListUtils.ReplaceAll(datalist, "Milk", "Yoghurt");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("REPLACE TEST");
+        Console.ResetColor();
+        datalist = ListUtils.ReplaceAll(datalist, "Milk", "Yoghurt");
         foreach (string item in datalist)
         {
-            Console.WriteLine($"{item}");
+            Console.Write($"[{item}] ");
         }
+        Console.WriteLine();
+
         // Swap Test
-        ListUtils.SwapItems(datalist, 1, 2);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("SWAP TEST");
+        Console.ResetColor();
+        datalist = ListUtils.SwapItems(datalist, 1, 2);
         foreach (string item in datalist)
         {
-            Console.WriteLine($"{item}");
+            Console.Write($"[{item}] ");
         }
+        Console.WriteLine();
+
         datalist = ["Milk", "Eggs", "Milk", "Bread", "Milk", "Cheese"];
 
         //5. Purge Test
-        ListUtils.PurgeDuplicates(datalist);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("PURGE TEST");
+        Console.ResetColor();
+        datalist = ListUtils.PurgeDuplicates(datalist);
+        Console.WriteLine("FINAL LIST");
         foreach (string item in datalist)
         {
-            Console.WriteLine("FINAL LIST");
-            Console.WriteLine($"{item}");
+            Console.Write($"[{item}] ");
         }
+        Console.WriteLine();
     }
 }
