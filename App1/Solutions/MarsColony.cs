@@ -1,0 +1,210 @@
+namespace Exercises;
+//////////////////////////ARCHITECTURE//////////////////////////
+class ResourceManager
+{
+    private int _water;
+    public int Water
+    {
+        get {return _water;}
+        set //Clamping water to 0 and 100
+        {
+            if(value < 0) _water = 0;
+
+            else if (value > 100) _water = 100;
+
+            else _water = value;
+        }
+    }
+    private int _oxygen;
+    public int Oxygen
+    {
+        get {return _oxygen;}
+        
+        set //Clamping oxygen to 0 and 100
+        {
+            if(value < 0) _oxygen = 0;
+
+            else if (value > 100) _oxygen = 100;
+
+            else _oxygen = value;
+        }
+    }
+    private int _energy;
+    public int Energy
+    {
+        get {return _energy;}
+        
+        set //Clamping energy to 0 and 100
+        {
+            if(value < 0) _energy = 0;
+
+            else if (value > 100) _energy = 100;
+
+            else _energy = value;
+        }
+    }
+    //Low Oxygen Flag
+    public bool LowOxygen => Oxygen < 20;
+    //Constructor
+    public ResourceManager(int water, int oxygen, int energy)
+    {
+        Water = water;
+        Oxygen = oxygen;
+        Energy = energy;
+    }
+}
+class InfrastructureManager
+{
+    //Constructor
+    public int energy;
+    public int water;
+    public int oxygen;
+    public int populationCap;
+    public int emptyNodes;
+    
+    public InfrastructureManager(int energy, int water, int oxygen, int populationCap, int emptyNodes)
+    {
+        this.energy = energy;
+        this.water = water;
+        this.oxygen = oxygen;
+        this.populationCap = populationCap;
+        this.emptyNodes = emptyNodes;
+    }
+    string [,] infraGrid = new string [4,4];
+    string solarPanel = "SP";
+    string greenHouse = "GH";
+    string habDome = "HD";
+    string electrolyser = "EL";
+    string empty = "N/A";
+    int habDomeCount = 0;    
+    public InfrastructureManager ScanProduction(ResourceManager Resources)
+    {
+        foreach (string modules in infraGrid)
+        {
+            if (modules == solarPanel) Resources.Energy += 10;
+            
+            if (modules == greenHouse) Resources.Water += 10;
+
+            if (modules == electrolyser) Resources.Oxygen += 10;
+
+            if (modules == empty) emptyNodes++;
+
+            if (modules == habDome)
+            {
+                Resources.Oxygen += 10; 
+                habDomeCount++; 
+            }
+        }
+        populationCap = habDomeCount*10;
+        return new(energy, water, oxygen, populationCap, emptyNodes);
+    }   
+}
+class ColonistManager
+{
+    private string _name;
+    public string Name {get; set;}
+    private string _job;
+    public string Job {get;set;}
+    private int _health;
+    public int Health
+    {
+        get {return _health;}
+        set
+        {
+        if (value < 0) _health = 0;
+        else if (value > 100) _health = 100;
+        else {_health = value;}
+        }    
+    }
+    public bool isAlive => Health == 0;
+    //Constructor
+    public ColonistManager(string Name, string Job, int Health)
+    {
+        this.Health = Health;
+        this.Job = Job;
+        this.Name = Name;
+    }
+    List<ColonistManager> colonists = new List<ColonistManager>();
+    public void Eat(ResourceManager Resources)
+    {//I have to pass resources and then subtract from it for each colonist.
+     //Each colonist needs one water and one oxygen per day
+        foreach (ColonistManager Colonist in colonists)
+        {
+            if (Resources.Water > 1 && Resources.Oxygen > 1 && isAlive == true)
+            {
+                Resources.Water -= 1;
+                Resources.Oxygen -= 1;
+            }
+        }
+    }
+    public void TakeDamage(ResourceManager Resources)
+    {
+        foreach (ColonistManager Colonist in colonists)
+        {
+            if (Resources.Water == 0 && Resources.Oxygen == 0 && isAlive == true)
+            {
+                Colonist.Health -= 20;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Colonist {Colonist.Name} has taken damage");
+                Console.ResetColor();
+            }
+        }
+    }
+    public void Reproduce(ResourceManager Resources, InfrastructureManager Infrastructure)
+    {//This method lets them bone and make new colonists
+        
+        if(Resources.Water == 100 && Resources.Oxygen == 100 && isAlive == true && Infrastructure.populationCap < colonists.Count)
+        {
+            bool reproductionConfirmer = false;
+            while(reproductionConfirmer == false)
+            {
+                try
+                {
+                    Random enable = new Random();
+                    int reproductionModifier = enable.Next(0,2);
+                    if (reproductionModifier == 1)
+                    {
+                        Random index1 = new Random();
+                        int selectionIndex1 = index1.Next(0, colonists.Count);
+                        Random index2 = new Random();
+                        int seletionIndex2 = index2.Next(0,colonists.Count);
+
+                        Console.WriteLine($"Colonist {colonists[selectionIndex1].Name} and colonist {colonists[seletionIndex2].Name} had a child!!");
+                        Thread.Sleep(2000);
+                        Console.WriteLine($"What would you like to name the child?");
+                        string childName = Console.ReadLine()?? string.Empty;
+                        Console.WriteLine($"What would you like their job to be");
+                        Console.WriteLine("1. Miner \n2. Engineer\n3. Miscallenous");
+                        string childJob = Console.ReadLine()?? string.Empty;
+
+                        ColonistManager newColonist = new ColonistManager(childName, childJob, 100);
+                        colonists.Add(newColonist);
+                        reproductionConfirmer = true;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Enter a name that is a String");
+                    reproductionConfirmer = false;
+                }
+            }
+        }
+    }
+    public void Die()
+    {
+        foreach(ColonistManager colonist in colonists)
+        {
+            if (isAlive == false)
+            {//Look at this cool ass piece of code I found
+             //I found a way to just remove all items in a list that don't meet a certain condition
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Colonist {colonist.Name} has died!");
+                Console.ResetColor();
+                Thread.Sleep(500);
+            }
+        }
+        colonists.RemoveAll(c => isAlive == false);
+    }
+}
+
+//////////////////////////SIMULATION//////////////////////////

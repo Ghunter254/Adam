@@ -25,7 +25,7 @@ PART 1: ARCHITECTURAL REQUIREMENTS (The Design)
      - If Oxygen drops below 20, the property itself should change a status flag 
        (e.g., `IsCriticalState = true`) or print a Red Alert to the console immediately.
      - You cannot rely on the main loop to check for negative numbers. The Class must protect itself.
-
+   
 2. THE MAP (The Infrastructure)
    - You need a 3x3 or 4x4 grid (2D Array) representing the colony sectors.
    - Each slot can hold a building type (e.g., "Solar Panel", "Greenhouse", "Habitat", "Empty").
