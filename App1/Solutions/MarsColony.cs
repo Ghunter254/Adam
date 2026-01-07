@@ -1,3 +1,5 @@
+using System.Runtime.Versioning;
+
 namespace Exercises;
 //////////////////////////ARCHITECTURE//////////////////////////
 class ResourceManager
@@ -9,9 +11,7 @@ class ResourceManager
         set //Clamping water to 0 and 100
         {
             if(value < 0) _water = 0;
-
             else if (value > 100) _water = 100;
-
             else _water = value;
         }
     }
@@ -23,9 +23,7 @@ class ResourceManager
         set //Clamping oxygen to 0 and 100
         {
             if(value < 0) _oxygen = 0;
-
             else if (value > 100) _oxygen = 100;
-
             else _oxygen = value;
         }
     }
@@ -33,13 +31,10 @@ class ResourceManager
     public int Energy
     {
         get {return _energy;}
-        
         set //Clamping energy to 0 and 100
         {
             if(value < 0) _energy = 0;
-
             else if (value > 100) _energy = 100;
-
             else _energy = value;
         }
     }
@@ -61,34 +56,36 @@ class InfrastructureManager
     public int oxygen;
     public int populationCap;
     public int emptyNodes;
-    
-    public InfrastructureManager(int energy, int water, int oxygen, int populationCap, int emptyNodes)
+    public string [,] infraGrid;
+    private readonly int rows = 4;
+    private readonly int columns = 4;
+
+    public int habDomeCount ;
+
+    public InfrastructureManager(int energy, int water, int oxygen, int populationCap, int emptyNodes, int habDomeCount)
     {
         this.energy = energy;
         this.water = water;
         this.oxygen = oxygen;
         this.populationCap = populationCap;
         this.emptyNodes = emptyNodes;
+        infraGrid = new string [rows,columns];
+        this.habDomeCount = 0;
     }
-    string [,] infraGrid = new string [4,4];
+
     string solarPanel = "SP";
     string greenHouse = "GH";
     string habDome = "HD";
     string electrolyser = "EL";
     string empty = "N/A";
-    int habDomeCount = 0;    
     public InfrastructureManager ScanProduction(ResourceManager Resources)
     {
         foreach (string modules in infraGrid)
         {
             if (modules == solarPanel) Resources.Energy += 10;
-            
             if (modules == greenHouse) Resources.Water += 10;
-
             if (modules == electrolyser) Resources.Oxygen += 10;
-
             if (modules == empty) emptyNodes++;
-
             if (modules == habDome)
             {
                 Resources.Oxygen += 10; 
@@ -96,7 +93,7 @@ class InfrastructureManager
             }
         }
         populationCap = habDomeCount*10;
-        return new(energy, water, oxygen, populationCap, emptyNodes);
+        return new(energy, water, oxygen, populationCap, emptyNodes, habDomeCount);
     }   
 }
 class ColonistManager
@@ -111,9 +108,9 @@ class ColonistManager
         get {return _health;}
         set
         {
-        if (value < 0) _health = 0;
-        else if (value > 100) _health = 100;
-        else {_health = value;}
+            if (value < 0) _health = 0;
+            else if (value > 100) _health = 100;
+            else {_health = value;}
         }    
     }
     public bool isAlive => Health == 0;
@@ -126,8 +123,7 @@ class ColonistManager
     }
     List<ColonistManager> colonists = new List<ColonistManager>();
     public void Eat(ResourceManager Resources)
-    {//I have to pass resources and then subtract from it for each colonist.
-     //Each colonist needs one water and one oxygen per day
+    {
         foreach (ColonistManager Colonist in colonists)
         {
             if (Resources.Water > 1 && Resources.Oxygen > 1 && isAlive == true)
@@ -150,9 +146,22 @@ class ColonistManager
             }
         }
     }
+    public void TakeMildPlagueDamage()
+    {
+        foreach (ColonistManager Colonist in colonists)
+        {
+            if (isAlive == true)    Colonist.Health -= 15;
+        }
+    }
+    public void TakeHeavyPlagueDamage()
+    {
+        foreach (ColonistManager Colonist in colonists)
+        {
+            if (isAlive == true)    Colonist.Health -= 20;
+        }
+    }
     public void Reproduce(ResourceManager Resources, InfrastructureManager Infrastructure)
-    {//This method lets them bone and make new colonists
-        
+    { 
         if(Resources.Water == 100 && Resources.Oxygen == 100 && isAlive == true && Infrastructure.populationCap < colonists.Count)
         {
             bool reproductionConfirmer = false;
@@ -193,10 +202,10 @@ class ColonistManager
     public void Die()
     {
         foreach(ColonistManager colonist in colonists)
-        {
+        {//Look at this cool ass piece of code I found
+         //I found a way to just remove all items in a list that don't meet a certain condition
             if (isAlive == false)
-            {//Look at this cool ass piece of code I found
-             //I found a way to just remove all items in a list that don't meet a certain condition
+            {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine($"Colonist {colonist.Name} has died!");
                 Console.ResetColor();
@@ -206,5 +215,68 @@ class ColonistManager
         colonists.RemoveAll(c => isAlive == false);
     }
 }
-
 //////////////////////////SIMULATION//////////////////////////
+class Events()
+{
+    public void Plague(ColonistManager colonist)
+    {
+        Random random = new Random();
+        int severity = random.Next(1,3);
+
+        if (severity == 1)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"A flu outbreak has begun!");
+            Console.WriteLine($"Colonists take 10 damage each");
+            colonist.TakeMildPlagueDamage();
+        }
+        if (severity == 2)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine($"A Covid outbreak has begun!");
+            Console.WriteLine($"Colonists take 20 damage each");
+            colonist.TakeHeavyPlagueDamage();
+        }
+    }
+    public void MeteorStrike(InfrastructureManager infrastructureManager)
+    {
+        Random index1 = new Random();
+        int row = index1.Next(0,4);
+        Random index2 = new Random();
+        int column = index2.Next(0,4);
+        string targeted = infrastructureManager.infraGrid[row,column];
+
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine($"METEOR STRIKE at {infrastructureManager.infraGrid[row,column]} !");
+        Console.WriteLine($"{targeted} has been destroyed!");
+        Console.ResetColor();
+        infrastructureManager.infraGrid[row,column] = "N/A";
+    }
+    public void Failure(InfrastructureManager infrastructureManager, ResourceManager Resources)
+    {
+        Random index1 = new Random();
+        int row = index1.Next(0,4);
+        Random index2 = new Random();
+        int column = index2.Next(0,4);
+
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        string celltype = infrastructureManager.infraGrid[row,column];
+        //Piece of code that skips empty thingies
+        if (string.IsNullOrEmpty(celltype)) return;
+        Console.WriteLine($"Equipment failure at {celltype}");
+        
+        if (celltype == "SP")    Resources.Energy -= 10;
+        if (celltype == "GH")    Resources.Water -= 10;
+        if (celltype == "EL")    Resources.Oxygen -= 10;
+        if (celltype == "HD")    Resources.Oxygen -= 10;
+    }
+    public void EventExecutor()
+    {
+        Random random = new Random();
+        int eventmodifier = random.Next(0,2);
+        if(eventmodifier == 1)
+        {
+            
+        }
+    }
+}

@@ -1,0 +1,51 @@
+Fuck this Assignment Looks difficult as fuck holy shit
+30 days simulated
+
+==========ARCHITECTURE==========
+
+The buildings are laid out in a 4x4 Array
+    buildings
+        Solar Panel = Adds energy (SP)
+        Greenhouse = Adds Water   (GH)
+        Hab Dome = Adds Oxygen and a cap on the number of colonists (HD)
+        Electrolyser = Adds Oxygen (EL)
+        Empty = Empty slot (N/A)
+    
+The colonists are in a list
+    Colonist Properties
+        Each colonist has a name, job and health
+        Each colonist consumes one water and one Oxygen a day
+        If there are no resources available, they take damage
+        If health is zero, they die
+        People are born and people die
+
+Encapsulation
+    Resources as Properties
+        Oxygen
+        Water
+        Energy
+    Logic
+        Clamp to 0 and 100
+        If oxygen is below 20, raise a flag that prints an alert to the console
+
+==========SIMULATION==========
+Runs for 30 days
+
+Event Phase
+    Random shit has a chance of happening every day
+        Meteor strike = hits a random space and destroys equipment
+        Plague = decreases health
+        Failure = equipment underperforms on that day
+
+Production Phase
+    Scans the map to evaluate resources
+    Adds to resource Properties
+
+Consumption Phase
+    Loops through the list to see how the resources are used
+    Deduct resources
+    Check deaths and do the shi
+
+Report Phase
+    Print the day number, population count, resource levels.
+    
