@@ -218,7 +218,7 @@ class ColonistManager
 //////////////////////////SIMULATION//////////////////////////
 class Events()
 {
-    public void Plague(ColonistManager colonist)
+    public static void Plague(ColonistManager colonist)
     {
         Random random = new Random();
         int severity = random.Next(1,3);
@@ -228,6 +228,7 @@ class Events()
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"A flu outbreak has begun!");
             Console.WriteLine($"Colonists take 10 damage each");
+            Console.ResetColor();
             colonist.TakeMildPlagueDamage();
         }
         if (severity == 2)
@@ -235,10 +236,11 @@ class Events()
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"A Covid outbreak has begun!");
             Console.WriteLine($"Colonists take 20 damage each");
+            Console.ResetColor();
             colonist.TakeHeavyPlagueDamage();
         }
     }
-    public void MeteorStrike(InfrastructureManager infrastructureManager)
+    public static void MeteorStrike(InfrastructureManager infrastructureManager)
     {
         Random index1 = new Random();
         int row = index1.Next(0,4);
@@ -252,7 +254,7 @@ class Events()
         Console.ResetColor();
         infrastructureManager.infraGrid[row,column] = "N/A";
     }
-    public void Failure(InfrastructureManager infrastructureManager, ResourceManager Resources)
+    public static void Failure(InfrastructureManager infrastructureManager, ResourceManager Resources)
     {
         Random index1 = new Random();
         int row = index1.Next(0,4);
@@ -264,19 +266,30 @@ class Events()
         //Piece of code that skips empty thingies
         if (string.IsNullOrEmpty(celltype)) return;
         Console.WriteLine($"Equipment failure at {celltype}");
-        
+
         if (celltype == "SP")    Resources.Energy -= 10;
         if (celltype == "GH")    Resources.Water -= 10;
         if (celltype == "EL")    Resources.Oxygen -= 10;
         if (celltype == "HD")    Resources.Oxygen -= 10;
     }
-    public void EventExecutor()
+    public static void EventExecutor(ColonistManager colonist, InfrastructureManager infrastructure, ResourceManager resources)
     {
         Random random = new Random();
-        int eventmodifier = random.Next(0,2);
-        if(eventmodifier == 1)
+        int enabler = random.Next(0,2);
+        if(enabler == 1)
         {
-            
+            Random rand = new Random();
+            int eventType = random.Next(0,3);
+
+            if (eventType == 0)     Plague(colonist);
+            if (eventType == 1)     MeteorStrike(infrastructure);
+            if (eventType == 2)     Failure(infrastructure, resources);
         }
+        else if (enabler == 0) return;
     }
+}
+class Simulator()
+{
+    
+
 }
