@@ -1,0 +1,113 @@
+CODE REVIEW.
+
+Great job implementing the properties and the advanced List logic (RemoveAll).
+However, there are 3 Critical Logic Bugs that will break the game mechanics,
+and 2 Architectural issues that will cause strange behavior.
+
+See the breakdown below.
+
+LOGIC Bugs
+
+
+1. THE "ZOMBIE" BOOLEAN
+   Location: class ColonistManager -> isAlive
+   
+   Current Code:
+   public bool isAlive => Health == 0;
+
+   The Problem:
+   Read that line carefully. It says "I am Alive IF my Health is Zero."
+   This means dead people are "Alive" and healthy people are "Not Alive."
+   
+   Why it breaks the game:
+   - Your Eat() method checks: if (... && isAlive == true)
+   - Result: Only corpses will eat your food.
+   
+   The Fix:
+   public bool IsAlive => Health > 0;
+
+   I have given you thr fix here and in the second problem as well but the rest i will not....
+
+
+2. THE STARVATION LOGIC (AND vs OR)
+   Location: class ColonistManager -> TakeDamage()
+   
+   Current Code:
+   if (Resources.Water == 0 && Resources.Oxygen == 0 && ...)
+
+   The Problem:
+   The '&&' operator means BOTH conditions must be true.
+   If you have 0 Water but 100 Oxygen, the code says "False" (No damage).
+   Your colonists will never die unless you run out of EVERYTHING at the exact same time.
+   
+   The Fix:
+   Use '||' (OR).
+   if ((Resources.Water == 0 || Resources.Oxygen == 0) && IsAlive)
+
+
+3. THE POPULATION CAP BLOCKER
+   Location: class ColonistManager -> Reproduce()
+   
+   Current Code:
+   if (... && Infrastructure.populationCap < colonists.Count)
+
+   The Problem:
+   Example: Cap is 50. Current Colonists is 10.
+   Your code asks: "Is 50 < 10?" -> False.
+   Result: No one will ever be born.
+
+    Find a solution.
+
+
+DESIGN ISSUES.
+
+4. THE "IDENTITY CRISIS"
+   Location: class ColonistManager
+   
+   The Problem:
+   This class is trying to do two jobs at once:
+   1. It holds the data for ONE person (Name, Job, Health).
+   2. It holds the LIST of all people (List<ColonistManager>).
+   
+   When you write 'new ColonistManager(...)' inside the Reproduce method, 
+   you are creating a new Baby who also holds a hidden, empty list of colonists inside them.
+   It works for now, but it is confusing.
+   
+   The fix is that you find a better design pattern for this.
+
+
+5. THE "USELESS RETURN"
+   Location: class InfrastructureManager -> ScanProduction()
+   
+   Current Code:
+   return new(energy, water, ...);
+   
+   The Problem:
+   You are correctly updating the 'Resources' object inside the loop (Resources.Energy += 10).
+   That is perfect.
+   But at the end, you create and return a brand new 'InfrastructureManager' object 
+   that immediately gets thrown away.
+   
+   Simply put, you have already set the resources when you called resources.Enery ... the return statement
+   could be simpler or even not needed.
+
+
+EFFICIENY
+
+6. THE "INFINITE RANDOMNESS" TRAP
+   Location: Inside Plague(), MeteorStrike(), Reproduce()
+   
+   Current Code:
+   Random random = new Random();
+   
+   The Problem:
+   'new Random()' uses the computer clock to pick a starting number.
+   Computers are so fast that if you call Plague() and Meteor() back-to-back, 
+   the time hasn't changed yet. You will get the exact same "Random" number every time.
+   
+   The Fix:
+   Create ONE static Random instance at the top of the class.
+   static Random _rng = new Random();
+   
+   Then just use '_rng.Next()' inside your methods.
+
