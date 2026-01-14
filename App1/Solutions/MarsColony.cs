@@ -297,14 +297,15 @@ class Events()
 }
 class Simulator()
 {// I want this class to deploy all the methods as well as run the 30 day loop with appropriate thread sleeps and shi
-    public void SimulationLoop(InfrastructureManager infrastructure, ResourceManager resource, Events events)
+    public void SimulationLoop(InfrastructureManager infrastructure, ResourceManager resource, Events events, ColonistManager colonist)
     //Lowkirkuenly set da resources
     {
+        ResourceManager resources = new(resource.Water, resource.Energy, resource.Oxygen);
+        ColonistManager colonists = new(colonist.Name, colonist.Job, colonist.Health);
+
         resource.Oxygen = 50;
         resource.Energy = 50;
         resource.Water = 50;
-
-        InfrastructureManager infrastructures = new(infrastructure.populationCap,infrastructure.emptyNodes,infrastructure.habDomeCount);
 
         for(int i = 0; i <= 30; i++)
         // Run the loop for 30 days
@@ -312,8 +313,16 @@ class Simulator()
         // Then ScanProduction to update everything
         // Then run all ColonistMethods
         {
-            InfrastructureManager.ScanProduction(infrastructure);
-            
+           Console.WriteLine($"Day {i}");
+
+            infrastructure.ScanProduction(resources, infrastructure);
+            Events.EventExecutor(colonists, infrastructure, resources);
+
+            colonists.Eat(resources);
+            colonists.TakeDamage(resources);
+            colonists.Die();
+
+            Thread.Sleep(2000); 
         }
     }
 }
