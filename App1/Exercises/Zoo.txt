@@ -1,0 +1,94 @@
+ASSIGNMENT: THE ZOO MANAGEMENT SYSTEM
+
+Goal: 
+Build a system that manages different types of animals.
+You must use Inheritance, Interfaces, Enums, and Dictionaries.
+
+CONTEXT:
+You are the head zookeeper. You have a list of animals. 
+Some animals eat Meat, some eat Plants. 
+Some animals can perform tricks for the guests, others just sleep.
+You need to write a loop that feeds them and makes them perform.
+
+-------------------------------------------------------------------
+
+PART 1: THE ARCHITECTURE (Classes)
+
+1. Enum: `FoodType`
+   - Options: Meat, Plants, Fish.
+
+2. Abstract Class: `Animal`
+   - Property: `Name` (string).
+   - Property: `Hunger` (int, 0-10).
+   - Property: `Diet` (FoodType).
+   - Constructor: Sets Name and Diet.
+   - Abstract Method: `MakeSound()` -> Prints specific noise.
+   - Virtual Method: `Eat(FoodType food)`
+     - Logic: If 'food' matches their 'Diet', decrease Hunger.
+     - Else: Print $"{Name} refuses to eat {food}."
+
+3. Interface: `IPerformsTricks`
+   - Method: `DoTrick()`
+
+4. Derived Classes:
+   - `Lion` (Eats Meat. Sound: "ROAR").
+   - `Monkey` (Eats Plants. Sound: "Ooh Ooh Aah").
+     - Implements `IPerformsTricks` (Trick: "Backflip").
+   - `Penguin` (Eats Fish. Sound: "Honk").
+     - Implements `IPerformsTricks` (Trick: "Slide on belly").
+
+-------------------------------------------------------------------
+
+PART 2: THE DATA (The Store Room)
+
+Create a class `ZooConfig`.
+Inside, create a `Dictionary<FoodType, int>` representing your food stock.
+- Meat: 10
+- Plants: 10
+- Fish: 10
+
+-------------------------------------------------------------------
+
+PART 3: THE MAIN LOOP (The Simulation)
+
+In your Program.cs:
+1. Create a `List<Animal>` with 1 Lion, 1 Monkey, 1 Penguin.
+2. Run a loop that simulates "Visiting each cage":
+
+   - LOOP START:
+     1. Ask the Animal to `MakeSound()`.
+     2. Check if the Animal is `IPerformsTricks`. 
+        - If yes, make them `DoTrick()`.
+        - If no, print "This animal just looks at you."
+     3. Try to Feed the animal.
+        - Check your Dictionary. Do you have their FoodType in stock?
+        - If yes: Call `Eat()`, reduce Stock count, print "Fed [Name]".
+        - If no: Print "Out of food for [Name]!"
+
+-------------------------------------------------------------------
+
+EXPECTED OUTPUT EXAMPLE:
+
+--- Visiting Simba (Lion) ---
+Simba says: ROAR!
+This animal just looks at you.
+[Fed Simba 1 Meat. Stock remaining: 9]
+
+--- Visiting George (Monkey) ---
+George says: Ooh Ooh Aah!
+George does a backflip!
+[Fed George 1 Plants. Stock remaining: 9]
+
+--- Visiting Pingu (Penguin) ---
+Pingu says: Honk!
+Pingu slides on belly!
+[Fed Pingu 1 Fish. Stock remaining: 9]
+
+-------------------------------------------------------------------
+
+HINTS:
+1. When looping the list, use the `is` keyword to check for the interface.
+   if (animal is IPerformsTricks trickster) { trickster.DoTrick(); }
+
+2. In the `Eat` method, remember to check the Enum. 
+   if (food == this.Diet) { ... }
