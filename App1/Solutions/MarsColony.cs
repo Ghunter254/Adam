@@ -19,7 +19,6 @@ class ResourceManager
     public int Oxygen
     {
         get {return _oxygen;}
-        
         set //Clamping oxygen to 0 and 100
         {
             if(value < 0) _oxygen = 0;
@@ -51,9 +50,7 @@ class ResourceManager
 class InfrastructureManager
 {
     //Constructor
-    public int energy;
-    public int water;
-    public int oxygen;
+
     public int populationCap;
     public int emptyNodes;
     public string [,] infraGrid;
@@ -62,11 +59,9 @@ class InfrastructureManager
 
     public int habDomeCount ;
 
-    public InfrastructureManager(int energy, int water, int oxygen, int populationCap, int emptyNodes, int habDomeCount)
+    public InfrastructureManager(int populationCap, int emptyNodes, int habDomeCount)
     {
-        this.energy = energy;
-        this.water = water;
-        this.oxygen = oxygen;
+
         this.populationCap = populationCap;
         this.emptyNodes = emptyNodes;
         infraGrid = new string [rows,columns];
@@ -78,7 +73,7 @@ class InfrastructureManager
     string habDome = "HD";
     string electrolyser = "EL";
     string empty = "N/A";
-    public InfrastructureManager ScanProduction(ResourceManager Resources)
+    public InfrastructureManager ScanProduction(ResourceManager Resources, InfrastructureManager infrastructure)
     {
         foreach (string modules in infraGrid)
         {
@@ -93,7 +88,7 @@ class InfrastructureManager
             }
         }
         populationCap = habDomeCount*10;
-        return new(energy, water, oxygen, populationCap, emptyNodes, habDomeCount);
+        return new(populationCap, emptyNodes, habDomeCount);
     }   
 }
 class ColonistManager
@@ -113,7 +108,7 @@ class ColonistManager
             else {_health = value;}
         }    
     }
-    public bool isAlive => Health == 0;
+    public bool isAlive => Health > 0;
     //Constructor
     public ColonistManager(string Name, string Job, int Health)
     {
@@ -137,7 +132,7 @@ class ColonistManager
     {
         foreach (ColonistManager Colonist in colonists)
         {
-            if (Resources.Water == 0 && Resources.Oxygen == 0 && isAlive == true)
+            if (Resources.Water == 0 || Resources.Oxygen == 0 && isAlive == true)
             {
                 Colonist.Health -= 20;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -160,9 +155,21 @@ class ColonistManager
             if (isAlive == true)    Colonist.Health -= 20;
         }
     }
+    public void CreateColonist()
+    {
+        Console.WriteLine("Create 10 new colonists by entering their names and Jobs below");
+        for(int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine($"{i} Enter Name;");
+            string colonistName = Console.ReadLine()?? string.Empty;
+            Console.WriteLine($"{i} Enter Job;");
+            Console.WriteLine("1. Miner \n2. Engineer\n3. Miscallenous");
+            string colonistJob = Console.ReadLine()?? string.Empty;
+        }
+    }
     public void Reproduce(ResourceManager Resources, InfrastructureManager Infrastructure)
     { 
-        if(Resources.Water == 100 && Resources.Oxygen == 100 && isAlive == true && Infrastructure.populationCap < colonists.Count)
+        if(Resources.Water == 100 && Resources.Oxygen == 100 && isAlive == true && Infrastructure.populationCap > colonists.Count)
         {
             bool reproductionConfirmer = false;
             while(reproductionConfirmer == false)
@@ -289,7 +296,33 @@ class Events()
     }
 }
 class Simulator()
-{
-    
+{// I want this class to deploy all the methods as well as run the 30 day loop with appropriate thread sleeps and shi
+    public void SimulationLoop(InfrastructureManager infrastructure, ResourceManager resource, Events events, ColonistManager colonist)
+    //Lowkirkuenly set da resources
+    {
+        ResourceManager resources = new(resource.Water, resource.Energy, resource.Oxygen);
+        ColonistManager colonists = new(colonist.Name, colonist.Job, colonist.Health);
 
+        resource.Oxygen = 50;
+        resource.Energy = 50;
+        resource.Water = 50;
+
+        for(int i = 0; i <= 30; i++)
+        // Run the loop for 30 days
+        // First run random events function
+        // Then ScanProduction to update everything
+        // Then run all ColonistMethods
+        {
+           Console.WriteLine($"Day {i}");
+
+            infrastructure.ScanProduction(resources, infrastructure);
+            Events.EventExecutor(colonists, infrastructure, resources);
+
+            colonists.Eat(resources);
+            colonists.TakeDamage(resources);
+            colonists.Die();
+
+            Thread.Sleep(2000); 
+        }
+    }
 }
