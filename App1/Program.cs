@@ -24,7 +24,8 @@ class Program
         //Exercises.MainThree.Run();
         // Exercises.Main2.Run2();
 
-        Lessons.OOPDemo.RunOOPDemo();
+        //Lessons.OOPDemo.RunOOPDemo();
+        MarsColony.Program.RunSimulation();
 
     }
 }

@@ -1,7 +1,6 @@
 // LESSON: MASTERING OBJECT-ORIENTED PROGRAMMING (OOP)
 //
 // CONTEXT:
-// Up until now, we have written "Procedural Code" (Step 1, Step 2, Step 3).
 // OOP is "Structural Code". We build objects that mirror the real world.
 //
 // THE 4 PILLARS OF OOP:
@@ -43,6 +42,7 @@ namespace Lessons
         {
             Health -= amount;
             Console.WriteLine($"{Name} took {amount} damage! HP: {Health}");
+
         }
 
         // ABSTRACT METHOD (Forced Behavior)
@@ -61,6 +61,7 @@ namespace Lessons
     public interface IHealer
     {
         void Heal(Character target); // Anyone with this interface MUST have this method.
+
     }
 
     // 3. INHERITANCE (The Children)
@@ -78,6 +79,7 @@ namespace Lessons
 
         // OVERRIDE (Changing the Parent's Virtual logic)
         public override void TakeDamage(int amount)
+        // Warrior takes 20 damage.
         {
             // Warriors use Armor to reduce damage.
             int reducedDamage = amount - Armor;
@@ -93,6 +95,7 @@ namespace Lessons
         {
             Console.WriteLine($"{Name} swings a Giant Axe!");
         }
+
     }
 
     // "Mage IS A Character AND can Heal"
